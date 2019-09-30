@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <style>
+        #page_container {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #accordion_search_bar_container {
+            position: relative;
+        }
+
+        #accordion_search_bar_container:after {
+            content: '\e003';
+            font-family: Glyphicons Halflings;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        #accordion_search_bar_container #accordion_search_bar {
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #cacaca;
+            border-radius: 25px;
+            outline: 0;
+        }
+
+        .panel-title a {
+            display: block;
+        }
+    </style>
+</head>
+
+<body style="margin: 0">
+    <div style="margin-left:10px;margin-right:10px;">
+        <div id="accordion_search_bar_container">
+            <input type="search" id="accordion_search_bar" placeholder="Search" />
+        </div>
+        <div style="display: flex;flex-wrap: nowrap;overflow-x: auto;">
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="flex: 0 0 auto;">
+                <% faqInfo.forEach(function(el) { %>
+                <% if (el.index == 0) { %>
+                <li class="nav-item active">
+                    <% } else { %>
+                <li class="nav-item"><% } %>
+                    <a class="nav-link active" id="<%=el.name%>-tab" data-toggle="tab" href="#<%=el.name%>" role="tab"
+                        aria-controls="home" aria-selected="true"><%=el.title%></a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+        <div class="tab-content" id="myTabContent" style="margin-top:10px;">
+            <% faqInfo.forEach(function(el) { %>
+            <% if (el.index == 0) { %>
+            <div class="tab-pane fade active in" id="<%=el.name%>" role="tabpanel" aria-labelledby="<%=el.name%>-tab">
+                <% } else { %>
+                <div class="tab-pane fade" id="<%=el.name%>" role="tabpanel" aria-labelledby="<%=el.name%>-tab">
+                    <% } %>
+                    <div class="panel-group" id="<%=el.name%>_accordion" role="tablist" aria-multiselectable="true">
+                        <% for(k in el.contents) { %>
+                        <div class="panel panel-default" id="collapse_<%=el.name%>_<%=k%>_container">
+                            <div class="panel-heading" role="tab" id="heading_<%=el.name%>_<%=k%>">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#<%=el.name%>_accordion"
+                                        href="#collapse_<%=el.name%>_<%=k%>" aria-expanded="true"
+                                        aria-controls="collapse_<%=el.name%>_<%=k%>">
+                                        <%=el.contents[k].title%>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse_<%=el.name%>_<%=k%>" class="panel-collapse collapse" role="tabpanel"
+                                aria-labelledby="heading_<%=el.name%>_<%=k%>">
+                                <div class="panel-body">
+                                    <%-el.contents[k].content%>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            (function () {
+                var searchTerm, panelContainerId;
+                $.expr[':'].containsCaseInsensitive = function (n, i, m) {
+                    return jQuery(n).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+                };
+
+                $('#accordion_search_bar').on('change keyup paste click', function () {
+                    searchTerm = $(this).val();
+                    $('.panel').each(function () {
+                        panelContainerId = '#' + $(this).attr('id');
+                        $(panelContainerId + ':not(:containsCaseInsensitive(' + searchTerm + '))').hide();
+                        $(panelContainerId + ':containsCaseInsensitive(' + searchTerm + ')').show();
+                    });
+                });
+            }());
+        </script>
+</body>
+
+</html>
