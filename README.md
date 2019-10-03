@@ -1,6 +1,8 @@
 # nodejs-accordion-faq-with-searchbar
 Node.js accordion FAQ with Searchbar
 
+![](accordion_faq_with_searchbar.gif)
+
 - The node.js app use ejs template package.
 - FAQ accordion with Searchbar.
 - Mobile responsive template.
