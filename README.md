@@ -1,5 +1,5 @@
 # nodejs-accordion-faq-with-searchbar
-![GitHub](https://img.shields.io/github/license/gnokoheat/nodejs-accordion-faq-with-searchbar) ![GitHub package.json version](https://img.shields.io/github/package-json/v/gnokoheat/nodejs-accordion-faq-with-searchbar) ![GitHub repo size](https://img.shields.io/github/repo-size/gnokoheat/nodejs-accordion-faq-with-searchbar)
+![GitHub](https://img.shields.io/github/license/gnokoheat/nodejs-accordion-faq-with-searchbar) ![GitHub package.json version](https://img.shields.io/github/package-json/v/gnokoheat/nodejs-accordion-faq-with-searchbar) ![GitHub repo size](https://img.shields.io/github/repo-size/gnokoheat/nodejs-accordion-faq-with-searchbar) ![GitHub last commit](https://img.shields.io/github/last-commit/gnokoheat/nodejs-accordion-faq-with-searchbar)
 
 **Node.js accordion FAQ with Searchbar**
 
